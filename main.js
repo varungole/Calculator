@@ -1,7 +1,7 @@
-var buttonIds = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '=' , '+' , '-', '*' , '/' , '%', 'C'];
+var buttonIds = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0', '=' , '+' , '-', '*' , '/' , '%', 'C'];
 
 var operatorClicked = false;
-var firstOperand = 0;
+var firstOperand = '';
 var secondOperand = 0;
 var operator = '';
 
@@ -13,6 +13,8 @@ buttonIds.forEach(function(id) {
         {
             document.getElementById('output-data').value = '';
             operatorClicked = false;
+            firstOperand = 0;
+            secondOperand = 0;
         }
         else if(button.value === '+')
         {
@@ -45,6 +47,14 @@ buttonIds.forEach(function(id) {
             operator = '*';
             operatorClicked = true
         }
+
+        else if(button.value === '%')
+        {
+            document.getElementById('output-data').value = '';
+            document.getElementById('output-data').value = '%';
+            operator = '%';
+            operatorClicked = true
+        }
         else if(button.value === '=')
         {
             if(operator == '+')
@@ -52,7 +62,7 @@ buttonIds.forEach(function(id) {
             var result = firstOperand + secondOperand;
             operatorClicked = false
             document.getElementById('output-data').value = result;
-            firstOperand = 0;
+            firstOperand = result;
             secondOperand = 0;
             }
 
@@ -61,7 +71,7 @@ buttonIds.forEach(function(id) {
             var result = firstOperand - secondOperand;
             operatorClicked = false
             document.getElementById('output-data').value = result;
-            firstOperand = 0;
+            firstOperand = result;
             secondOperand = 0;
             }
 
@@ -70,7 +80,7 @@ buttonIds.forEach(function(id) {
             var result = firstOperand * secondOperand;
             operatorClicked = false
             document.getElementById('output-data').value = result;
-            firstOperand = 0;
+            firstOperand = result;
             secondOperand = 0;
             }
 
@@ -79,7 +89,7 @@ buttonIds.forEach(function(id) {
             var result = firstOperand / secondOperand;
             operatorClicked = false
             document.getElementById('output-data').value = result;
-            firstOperand = 0;
+            firstOperand = result;
             secondOperand = 0;
             }
 
@@ -88,7 +98,7 @@ buttonIds.forEach(function(id) {
             var result = firstOperand % secondOperand;
             operatorClicked = false
             document.getElementById('output-data').value = result;
-            firstOperand = 0;
+            firstOperand = result;
             secondOperand = 0;
             }
         }
@@ -96,17 +106,16 @@ buttonIds.forEach(function(id) {
         {
             if(!operatorClicked)
             {
-             firstOperand = parseInt(button.value);
-             console.log(firstOperand);
+             firstOperand += button.value;
+             firstOperand = parseInt(firstOperand);
              document.getElementById('output-data').value = firstOperand;
             }
             else
             {
                 document.getElementById('output-data').value = '';
-                secondOperand = parseInt(button.value);
-                console.log(secondOperand);
+                secondOperand += button.value;
+                secondOperand = parseInt(secondOperand);
                 document.getElementById('output-data').value = secondOperand;
-
             }
         }
     })
